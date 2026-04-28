@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
+import click
 
 dtype = {
     "tournament": "string",
@@ -26,15 +27,16 @@ parse_dates = [
 ]
 
 
-def run():
-    filename = 'atp_tennis.csv'
-    tableName = 'tenis_data'
-    chunksize = 5000
-    pg_user = 'root'
-    pg_pass = 'root'
-    pg_host = 'localhost'
-    pg_port = 5432
-    pg_db = 'my_taxi'
+@click.command()
+@click.option('--filename', default='atp_tennis.csv', help='CSV file name')
+@click.option('--table-name', default='tenis_data', help='Table name')
+@click.option('--chunksize', default=5000, type=int, help='Chunk size')
+@click.option('--pg-user', default='root', help='PostgreSQL user')
+@click.option('--pg-pass', default='root', help='PostgreSQL password')
+@click.option('--pg-host', default='localhost', help='PostgreSQL host')
+@click.option('--pg-port', default=5432, type=int, help='PostgreSQL port')
+@click.option('--pg-db', default='my_taxi', help='PostgreSQL database')
+def run(filename, table_name, chunksize, pg_user, pg_pass, pg_host, pg_port, pg_db):
 
     engine = create_engine(f'postgresql://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}')
 
@@ -75,7 +77,7 @@ def run():
 
     # Subida directa
     df_final.to_sql(
-        name=tableName,
+        name=table_name,
         con=engine,
         if_exists='replace', # 'replace' crea la tabla de nuevo; 'append' añade datos
         index=False,         # No guardamos el índice de pandas como columna
@@ -83,7 +85,7 @@ def run():
         chunksize=chunksize     # Pandas divide el DF en pedazos al enviarlo a SQL
     )
 
-    print(f"¡Éxito! Se han subido {len(df_final)} filas a la tabla '{tableName}'.")
+    print(f"¡Éxito! Se han subido {len(df_final)} filas a la tabla '{table_name}'.")
 
 
 if __name__ == '__main__':
