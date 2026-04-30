@@ -1,6 +1,42 @@
-🎾 Tennis Data Ingestion Pipeline📋 Project OverviewThis project implements a robust data ingestion pipeline designed to process and store historical tennis match data. The architecture leverages Docker for containerization and PostgreSQL 18 for relational data storage, ensuring a scalable and reproducible environment for data engineering tasks.[!IMPORTANT]This project serves as the foundational data layer for a future MLOps pipeline designed to calculate Expected Value (EV+) and predict outcomes in tennis betting markets.✨ Key FeaturesContainerized Infrastructure: Custom Docker environment orchestrating a PostgreSQL 18 instance.Data Transformation (ETL): Python & Pandas for cleaning missing values, formatting date-time objects, and feature filtering.Automated Ingestion: Streamlined ingestion script using SQLAlchemy for efficient CSV-to-SQL streaming.Data Validation: Rigorous SQL testing to ensure data integrity and schema consistency.🛠 Tech StackCategoryTechnologyLanguagePython (managed with uv)DatabasePostgreSQL 18ContainerizationDocker & Docker ComposeLibrariesPandas, SQLAlchemy, Psycopg2🚀 How to Run the Project1. PrerequisitesInstall Docker & Docker Compose.Install uv (Python package manager).2. Database SetupLaunch the PostgreSQL engine in detached mode:Bashdocker compose up -d pg_tenis
-3. Environment ConfigurationInitialize the virtual environment and install dependencies:Bash# Using uv for near-instant installation
-uv sync
-4. Run the Ingestion PipelineClean and load the tennis data into the database:Bashuv run python ingest_data.py
-5. Verify the DataTo verify the records, launch pgAdmin:Bashdocker compose up -d pgadmin
-Access the interface at http://localhost:8085.📊 Data Insights & FeaturesThe pipeline focuses on variables critical for EV+ calculations:Match Metadata: Tournament level, surface (Clay, Grass, Hard), and round info.Performance Metrics: Aces, double faults, 1st serve %, and break points.Market Odds: Historical betting odds to identify market inefficiencies.Player Statistics: Current rankings and head-to-head records.⚙️ Technical ImplementationData Cleaning: Handling inconsistent player names and match "Walkovers".Type Casting: Precise conversion of categorical data for PostgreSQL optimization.Database Schema: Optimized for fast retrieval during strategy backtesting.🗺️ Future Roadmap (The MLOps Path)[x] Stage 1: ETL Pipeline & Relational Storage (Current).[ ] Stage 2: Feature Engineering & Exploratory Data Analysis (EDA).[ ] Stage 3: Model Training (XGBoost/LightGBM).[ ] Stage 4: Deployment of an automated EV+ bot.Developed as part of a Software Engineering portfolio focused on Data Engineering.
+# 🎾 Tennis Data Ingestion Pipeline
+
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
+## 📋 Project Overview
+This project implements a **robust data ingestion pipeline** designed to process and store historical tennis match data. The architecture leverages **Docker** for containerization and **PostgreSQL 18** for relational data storage, ensuring a scalable and reproducible environment for data engineering tasks.
+
+> [!IMPORTANT]
+> This project serves as the **foundational data layer** for a future MLOps pipeline designed to calculate **Expected Value (EV+)** and predict outcomes in tennis betting markets.
+
+---
+
+## ✨ Key Features
+*   **Containerized Infrastructure:** Custom Docker environment orchestrating a PostgreSQL 18 instance.
+*   **Data Transformation (ETL):** Python & Pandas for cleaning missing values, formatting date-time objects, and feature filtering.
+*   **Automated Ingestion:** Streamlined ingestion script using SQLAlchemy for efficient CSV-to-SQL streaming.
+*   **Data Validation:** Rigorous SQL testing to ensure data integrity and schema consistency.
+
+---
+
+## 🛠 Tech Stack
+| Category | Technology |
+| :--- | :--- |
+| **Language** | Python (managed with `uv`) |
+| **Database** | PostgreSQL 18 |
+| **Containerization** | Docker & Docker Compose |
+| **Libraries** | Pandas, SQLAlchemy, Psycopg2 |
+
+---
+
+## 🚀 How to Run the Project
+
+### 1. Prerequisites
+*   Install [Docker & Docker Compose](https://docs.docker.com/get-docker/).
+*   Install [uv](https://github.com/astral-sh/uv) (Python package manager).
+
+### 2. Database Setup
+Launch the PostgreSQL engine in detached mode:
+```bash
+docker compose up -d pg_tenis
