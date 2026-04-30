@@ -35,7 +35,7 @@ parse_dates = [
 @click.option('--pg-pass', default='root', help='PostgreSQL password')
 @click.option('--pg-host', default='localhost', help='PostgreSQL host')
 @click.option('--pg-port', default=5432, type=int, help='PostgreSQL port')
-@click.option('--pg-db', default='my_taxi', help='PostgreSQL database')
+@click.option('--pg-db', default='tenis_data', help='PostgreSQL database')
 def run(filename, table_name, chunksize, pg_user, pg_pass, pg_host, pg_port, pg_db):
 
     engine = create_engine(f'postgresql://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}')

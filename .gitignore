@@ -6,6 +6,9 @@ dist/
 wheels/
 *.egg-info
 *.parquet
+*.dockerignore
+*.yaml
+*.csv
 
 # Virtual environments
 .venv
